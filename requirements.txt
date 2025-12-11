@@ -1,3 +1,15 @@
-pydub>=0.25.1
-mutagen>=1.47.0
 simpleaudio>=1.0.4       # Para reproducción opcional con pydub
+# === INTROMIX MAKER - Requirements ===
+# Python 3.8 or higher recommended
+
+# Audio processing
+pydub==0.25.1          # Audio manipulation and export
+eyed3==0.9.7           # MP3 metadata and cover art handling
+# Environment variables
+python-dotenv==1.0.0   # Load configuration from .env file
+# Audio codecs (FFmpeg dependencies for pydub)
+# Note: FFmpeg must be installed separately on your system
+# Download from: https://ffmpeg.org/download.html
+
+# Additional utilities
+mutagen==1.47.0        # Alternative audio metadata library (optional backup)
