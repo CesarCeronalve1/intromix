@@ -1,3 +1,4 @@
+import eyed3
 import os
 import sys
 import random
@@ -210,7 +211,7 @@ def exportar_con_metadatos(audio, archivo_salida, metadatos, portada_path=None):
     # Si hay portada, la añadimos usando eyed3
     if portada_path and os.path.exists(portada_path):
         try:
-            import eyed3
+            # import eyed3
             
             # Cargar el archivo MP3
             audiofile = eyed3.load(temp_file)
