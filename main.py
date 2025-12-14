@@ -218,7 +218,7 @@ def obtener_metadatos(args):
         metadatos['title'] = 'intromix'
     
     if 'artist' not in metadatos:
-        metadatos['artist'] = 'Cesar Ceron'
+        metadatos['artist'] = 'Non'
     
     # Añadir fecha de creación al comentario si no hay comentario específico
     if 'comment' not in metadatos:
@@ -407,23 +407,23 @@ Ejemplos:
                        help="Ruta del archivo MP3 de salida.")
     parser.add_argument("-t", "--time", default="10:00", 
                        help="Duración total del mix (min:seg). Ej: 5:30")
-    parser.add_argument("-a", "--album", default="", 
+    parser.add_argument("-album", "--album", default="", 
                        help="Nombre del álbum para los metadatos.")
-    parser.add_argument("--title", default="", 
+    parser.add_argument("-title", default="", 
                        help="Título del mix (sobrescribe metadata.txt).")
-    parser.add_argument("--artist", default="", 
+    parser.add_argument("-artist", default="", 
                        help="Artista del mix (sobrescribe metadata.txt).")
-    parser.add_argument("--year", default="", 
+    parser.add_argument("-year", default="", 
                        help="Año del mix (sobrescribe metadata.txt).")
-    parser.add_argument("--genre", default="", 
+    parser.add_argument("-genre", default="", 
                        help="Género musical (sobrescribe metadata.txt).")
-    parser.add_argument("--comment", default="", 
+    parser.add_argument("-comment", default="", 
                        help="Comentario (sobrescribe metadata.txt).")
-    parser.add_argument("--subtitle", default="", 
+    parser.add_argument("-subtitle", default="", 
                        help="Subtítulo (sobrescribe metadata.txt).")
-    parser.add_argument("--track", default="", 
+    parser.add_argument("-track", default="", 
                        help="Número de pista (sobrescribe metadata.txt).")
-    parser.add_argument("--no-portada", action="store_true", 
+    parser.add_argument("-no-portada", action="store_true", 
                        help="Omitir la selección de portada.")
     return parser.parse_args()
 
