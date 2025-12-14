@@ -9,6 +9,7 @@ from pathlib import Path
 from pydub import AudioSegment
 from pydub.utils import mediainfo
 from dotenv import load_dotenv
+from efectos import efectos
 
 # === CONFIGURACIÓN GENERAL ===
 FADE_DURATION_MS = 1000
@@ -56,7 +57,9 @@ def cargar_audio_random_segmento(ruta):
     duracion_segmento = random.randint(DURACION_CLIP_MIN_MS, min(DURACION_CLIP_MAX_MS, len(audio)))
     inicio = random.randint(0, len(audio) - duracion_segmento)
     clip = audio[inicio:inicio + duracion_segmento]
-    return clip.fade_in(FADE_DURATION_MS).fade_out(FADE_DURATION_MS)
+    clip = efectos(clip)
+    return clip.fade_in(FADE_DURATION_MS) #.fade_out(FADE_DURATION_MS)
+    # return clip.fade_in(FADE_DURATION_MS).fade_out(FADE_DURATION_MS)
 
 
 def cargar_audio_transicion(efectos):
@@ -281,12 +284,11 @@ def crear_intromix(carpeta_entrada, carpeta_efectos, carpeta_intros, duracion_to
         if len(efecto) > 0:
             inicio_crossfade = len(mix_final) - len(nuevo_clip)
             mix_final = mix_final.overlay(efecto, position=inicio_crossfade)
-            print(f"   ↳ Efecto agregado: {os.path.basename(efecto._path)} ({len(efecto)/1000:.1f}s)")
+            print(f"   ↳ trancision agregada: {os.path.basename(efecto._path)} ({len(efecto)/1000:.1f}s)")
 
         duracion_actual += len(nuevo_clip) - FADE_DURATION_MS
         print(f"Añadido clip: {os.path.basename(ruta)} ({len(nuevo_clip)/1000:.1f}s + crossfade)")
-
-    return mix_final
+    return mix_final + cargar_audio_transicion(efectos)
 
 
 def exportar_con_metadatos(audio, archivo_salida, metadatos, portada_path=None):

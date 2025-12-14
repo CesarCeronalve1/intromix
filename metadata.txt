@@ -1,8 +1,9 @@
 titulo=Intromix
 artista=Cesar Ceron
-album=
+album=Lo mas chingon
 año=2026
-genero=
-editor=Cesar Ceron
-codificado por=Cesar Ceron
-comentario=Mezcla creada automáticamente
+genero=Intromix
+editor=ing. Sistemas Cesar Ceron
+codificado por=Cesar Ceron 
+comentario=Lo mejor de la musica
+tracknumero=1
