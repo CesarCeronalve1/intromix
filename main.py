@@ -163,6 +163,10 @@ def cargar_metadata_desde_archivo():
                         metadatos['subtitle'] = value
                     elif key == 'tracknumero':
                         metadatos['track_num'] = value
+                    elif key == 'editor':
+                        metadatos['publisher'] = value  # editor se mapea a publisher
+                    elif key == 'codificado por':
+                        metadatos['encoded_by'] = value
                     else:
                         # Si no es un campo mapeado, guardarlo como está
                         metadatos[key] = value
@@ -204,6 +208,10 @@ def obtener_metadatos(args):
     
     if hasattr(args, 'track') and args.track:
         metadatos['track_num'] = args.track
+    
+    # Los siguientes campos solo se pueden establecer desde metadata.txt
+    # ya que no hay argumentos de línea de comandos para ellos
+    # pero se mantienen si están en el archivo metadata.txt
     
     # Asegurar campos mínimos con valores por defecto
     if 'title' not in metadatos:
@@ -324,6 +332,15 @@ def exportar_con_metadatos(audio, archivo_salida, metadatos, portada_path=None):
                 audiofile.tag.track_num = track_num
             except ValueError:
                 print(f"⚠️ Número de pista inválido: {metadatos['track_num']}")
+        
+        # Nuevos campos: editor y codificado por
+        if 'publisher' in metadatos:  # editor se mapeó a publisher
+            audiofile.tag.publisher = metadatos['publisher']
+            print(f"✅ Editor establecido: {metadatos['publisher']}")
+        
+        if 'encoded_by' in metadatos:
+            audiofile.tag.encoded_by = metadatos['encoded_by']
+            print(f"✅ Codificado por establecido: {metadatos['encoded_by']}")
         
         # Añadir portada si existe
         if portada_path and os.path.exists(portada_path):
@@ -452,7 +469,7 @@ if __name__ == "__main__":
         
         print("\n📝 Metadatos que se aplicarán:")
         for key, value in metadatos.items():
-            if key in ['title', 'artist', 'album', 'year', 'genre', 'comment', 'subtitle', 'track_num']:
+            if key in ['title', 'artist', 'album', 'year', 'genre', 'comment', 'subtitle', 'track_num', 'publisher', 'encoded_by']:
                 print(f"   {key}: {value}")
         
         # Exportar con metadatos y portada
