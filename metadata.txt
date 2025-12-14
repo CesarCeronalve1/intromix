@@ -1,0 +1,12 @@
+# metadata.txt - Archivo de configuración de metadatos para Intromix
+# Formato: clave=valor (sin espacios alrededor del =)
+# Los valores pueden ir entre comillas si contienen espacios
+
+artista="Cesar Ceron"
+titulo="Mezcla Especial 2024"
+album="Intromix Vol. 1"
+año="2026"
+genero="Binario"
+comentario="Mezcla creada automáticamente con Intromix Creator"
+subtitulo="Edición Especial"
+tracknumero="1"
