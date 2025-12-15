@@ -12,7 +12,7 @@ def efectos(audio: AudioSegment) -> AudioSegment:
         return audio.fade_out(500)
 
     # Duración del fragmento final
-    tail_ms = random.randint(1000, 1400)
+    tail_ms = random.randint(1200, 1500)
 
     cuerpo = audio[:-tail_ms]
     tail = audio[-tail_ms:]
@@ -21,9 +21,10 @@ def efectos(audio: AudioSegment) -> AudioSegment:
         # "none",
         "tape_stop",
         "echo_tail",
+        "echo_tail2",
         "reverb_tail",
         "repeat_tail",
-         "micro_cut",
+        "micro_cut",
         # "reverse_hit"
     ])
 
@@ -57,6 +58,25 @@ def efectos(audio: AudioSegment) -> AudioSegment:
         tail = tail.overlay(tail - 6, position=180)
         tail = tail.overlay(tail - 12, position=360)
         print("efecto tail")
+
+
+    elif efecto == "echo_tail2":
+        # Parámetros configurables
+        num_echos = 6                    # Número de repeticiones
+        delay_inicial = 180              # Primer delay en ms
+        incremento_delay = 180           # Incremento entre ecos
+        volumen_inicial = -6             # Primer volumen en dB
+        decaimiento_volumen = 3          # Reducción de volumen por eco
+        
+        # Aplicar ecos en bucle
+        for i in range(num_echos):
+            delay = delay_inicial + (i * incremento_delay)
+            volumen = volumen_inicial - (i * decaimiento_volumen)
+            tail = tail.overlay(tail + volumen, position=delay)
+        
+        print(f"efecto echo con {num_echos} repeticiones")
+
+
 
     # 🏟️ 3. Reverb cola
     elif efecto == "reverb_tail":
@@ -93,6 +113,8 @@ def efectos(audio: AudioSegment) -> AudioSegment:
 
         tail = sum(partes, AudioSegment.silent(0))
         tail = tail.fade_out(600)
+
+    
 
 
     # 🎧 LOW FADE FINAL (SIEMPRE)

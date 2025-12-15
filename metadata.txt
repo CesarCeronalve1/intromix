@@ -4,6 +4,6 @@ album=Lo mas chingon
 año=2026
 genero=Intromix
 editor=ing. Sistemas Cesar Ceron
-codificado por=Cesar Ceron 
+codificado por=contacto 5538215052
 comentario=Lo mejor de la musica
 tracknumero=1
